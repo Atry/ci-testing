@@ -18,11 +18,8 @@ jobs:
         if: matrix.os == 'macos'
         run: |
           brew tap hhvm/hhvm
-          if [ "${{matrix.hhvm}}" = "latest" ]; then
-            brew install hhvm
-          else
-            HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=true brew install hhvm-${{matrix.hhvm}}
-          fi
+          wget https://raw.githubusercontent.com/Atry/homebrew-hhvm/Atry-patch-1/Formula/hhvm-nightly.rb
+          brew install hhvm-nightly.rb
       - name: Inspect HHVM and Hack versions
         run: |
           ls -l /usr/local/Cellar/hhvm-nightly
